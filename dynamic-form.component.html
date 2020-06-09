@@ -1,0 +1,93 @@
+<div class="panel panel-default dynamic-form">
+  <div class="panel-heading">
+    <h1>{{ $ctrl.layout.name }}</h1>
+
+  </div>
+  <div class="panel-body">
+    <form
+      name="form"
+      ng-submit="submitForm()"
+      ng-class="{ 'edit-form': isEdittingForm }" 
+    >
+      <span class="field-position"></span>
+      <div ng-repeat="field in $ctrl.layout.layout">
+
+        <!-- TEXTBOX FIELDS -->
+        <div ng-if="field.type=='textbox'" class="form-group" resizable resizable-enabled="isEdittingForm" resizable-field="field" ng-style="{ left: field.x, top: field.y, width: field.width }">
+          <label class="control-label">{{ field.label }}</label>
+          <div>
+            <div ng-if="!field.mask">
+              <input
+                type="{{ field.type }}"
+                name="{{ field.key }}"
+                id="{{ field.key }}"
+                data-ng-model="$ctrl.model.layout[field.key]"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <div ng-if="field.mask=='currency'">
+              <input
+                type="number"
+                name="{{ field.key }}"
+                id="{{ field.key }}"
+                data-ng-model="$ctrl.model.layout[field.key]"
+                class="form-control"
+                required
+              />
+            </div>
+            <p data-ng-show="form[field.key].$dirty && form[field.key].$error.required" class="label label-danger">Required!</p>
+          </div>
+        </div>
+
+        <!-- LABEL FIELDS -->
+        <div ng-if="field.type=='label'" class="form-group" resizable resizable-enabled="isEdittingForm" resizable-field="field" ng-style="{ left: field.x, top: field.y, width: field.width }">
+          <label class="control-label">{{ $ctrl.model.layout[field.key] }}</label>
+        </div>
+
+        <!-- GRID -->
+        <div ng-if="field.type=='grid'" class="form-group" resizable resizable-enabled="isEdittingForm" resizable-field="field" ng-style="{ left: field.x, top: field.y, width: field.width }">
+          <label class="col-sm-2 control-label">{{ field.label }}</label>
+          <table class="table table-bordered">
+            <tr>
+              <th ng-repeat="column in field.columns">{{ column.label }}</th>
+            </tr>
+            <tr ng-repeat="line in $ctrl.model.layout[field.key]">
+              <td ng-repeat="column in field.columns">
+                  <input
+                  type="text"
+                  name="{{ column.key }}"
+                  id="{{ column.key }}"
+                  data-ng-model="line[column.key]"
+                  class="form-control"
+                  ng-style="{ width: column.width }"
+                  required
+                />
+              </td>
+              <td ng-if="$ctrl.model.layout[field.key].length > 1">
+                <button type="button" class="btn btn-warning btn-sm" ng-click="deleteLine($ctrl.model.layout[field.key], $index)" ><span class="glyphicon glyphicon-remove"></span></button>        
+              </td>
+            </tr>
+          </table>
+          <button type="button" class="btn btn-success btn-sm" ng-click="addLine($ctrl.model.layout[field.key])" ><span class="glyphicon glyphicon-plus"></span></button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+  <div class="panel-footer">
+    <button ng-if="!isEdittingForm" ng-disabled="form.$invalid" type="submit" id="submit" ng-click="submitForm()" class="btn btn-primary">
+      Save
+    </button>
+    <button ng-if="!isEdittingForm" type="button" class="btn btn-default" ng-click="onEditForm()">
+      Edit form
+    </button>
+    <button ng-if="isEdittingForm" type="button" class="btn btn-success" ng-click="onSaveForm()">
+      Save form
+    </button>
+    <button ng-if="isEdittingForm" type="button" class="btn btn-default" ng-click="onCancelForm()">
+      Cancel
+    </button>
+  </div>
+</div>

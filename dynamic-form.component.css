@@ -1,0 +1,67 @@
+.dynamic-form .panel-body {
+  padding: 0;
+}
+
+.dynamic-form form {
+  position: relative;
+  height: 400px;
+  resize: vertical;
+  overflow: auto;
+}
+
+.dynamic-form .form-group {
+  position: absolute;
+  border: 3px solid transparent;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.dynamic-form .selected {
+  border-color: #4286f4 !important;
+}
+
+.dynamic-form .selected .resizer-top-left, .dynamic-form .selected .resizer-top-right,
+.dynamic-form .selected .resizer-bottom-left, .dynamic-form .selected .resizer-bottom-right { 
+  width: 12px; 
+  height: 12px; 
+  border: 3px solid #4286f4;
+  background: #4286f4;
+  position:absolute; 
+  top: -6px;
+  left: -6px;
+}
+
+.dynamic-form .selected .resizer-top-right {
+  left: initial;
+  right: -6px;
+}
+
+.dynamic-form .selected .resizer-bottom-left {
+  top: initial;
+  bottom: -6px;
+}
+
+.dynamic-form .selected .resizer-bottom-right {
+  top: initial;
+  left: initial;
+  bottom: -6px;
+  right: -6px;
+}
+
+.dynamic-form .form-group {
+  margin-bottom: 0;
+}
+
+.dynamic-form .edit-form {
+  background-image: -webkit-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
+  background-image: -moz-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
+  background-image: -ms-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
+  background-image: repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
+  -webkit-background-size: 3px 3px;
+  -moz-background-size: 3px 3px;
+  background-size: 3px 3px;
+}
+
+.dynamic-form .field-position {
+  float: right;
+}

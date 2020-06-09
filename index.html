@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="jquery-ui.min.css" rel="stylesheet" />
+  <link href="dynamic-form.component.css" rel="stylesheet" />
+  <link href="app.css" rel="stylesheet" />
+  <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+  <script src="jquery-ui.min.js"></script>
+  <script src="dynamic-form.component.js"></script>
+  <script src="app.js"></script>
+</head>
+
+<body ng-app="app">
+  <div ng-controller="AppController" class="container">
+    <dynamic-form model="model" layout="layout"></dynamic-form>
+    
+    <div ng-if="formSubmitData">
+        <h4>Model Data:</h4>
+      <pre>{{ formSubmitData | json }}</pre>
+    </div>
+    
+    <div ng-if="saveFormData">
+      <h4>Layout Data:</h4>
+      <pre>{{ saveFormData | json }}</pre>
+    </div>
+  </div>
+</body>
+
+</html>
